@@ -16,9 +16,37 @@ class MyApp extends StatelessWidget {
       home: Scaffold(
         appBar: AppBar(title: Text("App Bar"),),
         body: Center(
-          child: Text("Hello world"),
+          child: HelloText(),
         ),
       ),
     );
+  }
+}
+
+
+class HelloText extends StatefulWidget {
+  @override
+  _HelloTextState createState() => _HelloTextState();
+}
+
+class _HelloTextState extends State<HelloText> {
+  String helloText = '';
+  final myController = TextEditingController();
+
+  void sayHello(String text){
+    setState(() {
+      helloText = "Welcome " + text.toUpperCase() + '!';
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(children: [
+      TextField(
+        onChanged: (text) => sayHello(text),
+        controller: myController,
+      ),
+      Text(helloText),
+    ],);
   }
 }
